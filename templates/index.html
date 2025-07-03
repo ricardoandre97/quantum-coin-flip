@@ -62,11 +62,13 @@ Chen Tianhao     218352</pre>
       <details open class="bg-gray-100 p-3 rounded hidden" id="deviceCodeBox">
         <summary class="font-mono text-purple-700 text-sm cursor-pointer">PennyLane Code</summary>
         <pre class="text-sm font-mono"># To create states
-dev_analytic = qml.device("default.qubit",
+dev_analytic = qml.device(
+  "default.qubit",
   wires=1, shots=None)
 
 # To measure outcomes
-dev_shot = qml.device("default.qubit",
+dev_shot = qml.device(
+ "default.qubit",
   wires=1,shots=1)         </pre>
         <p class="text-xs text-gray-500 italic mt-2">This initializes a 1-qubit simulator.</p>
       </details>
@@ -129,7 +131,7 @@ dev_shot = qml.device("default.qubit",
         <p class="text-gray-600">🔒 That means once you flip the coin and see a result, it's locked in. Every future measurement will return the same face — the state has collapsed!</p>
 
       </div>
-      <p class="text-gray-600">Now it’s time to observe the result. Let's measure!</p>
+      <p class="text-gray-600">Now it’s time to observe the result. Let's measure using <span class="font-bold">PennyLane</span>!</p>
 
       <button id="flipBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
         🪙 Flip and Measure
