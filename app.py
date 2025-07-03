@@ -50,7 +50,8 @@ def measure():
     code = """@qml.qnode(dev_shot)
 def circuit():
     qml.Hadamard(wires=0)
-    return qml.sample(qml.PauliZ(0))"""
+    return qml.sample(
+            qml.PauliZ(0))"""
 
     return jsonify({
         "result": label,
