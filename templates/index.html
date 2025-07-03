@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quantum Coin Flip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+<!-- MathJax for rendering LaTeX -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+</head>
+<body  class="bg-gray-100 p-6 flex justify-center">
+  <div  class="w-full max-w-3xl space-y-8">
+
+    <!-- MEMBERS -->
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-4">
+      <h1 class="text-2xl font-bold text-purple-800">Quantum Mechanics PHY3601</h1>
+      <h2 class="mt-2 text-gray-600 fon">Exploring Qubits using PennyLane</h2>
+
+      <details class="w-fit bg-gray-100 p-3 rounded">
+        <summary class="font-mono text-purple-700 text-sm cursor-pointer">Members:</summary>
+        <pre class="text-sm font-mono">Ricardo Gonzalez 218385
+Shahrul Nizam    223647
+Chen Tianhao     218352</pre>
+      </details>
+    </div>
+
+    <!-- INTRO -->
+    <div  id="introCard" class="bg-white rounded-xl shadow-md p-6 space-y-4">
+      <h2 class="text-xl font-bold text-purple-800">Flip a Quantum Coin</h2>
+  
+      <div class="space-y-4">
+        <p class="text-gray-600">
+          🪙 Imagine a coin that follows <span class="font-bold">Quantum</span> rules. Unlike a classical coin that’s always either heads or tails, a quantum coin can be both — until you look.
+        </p>
+        <p class="text-gray-600">
+          🤯 What happens when we flip it?
+        </p>
+        <p class="text-gray-600">
+          🖥️ Let's simulate it using <span class="font-bold">PennyLane</span> in only 3 steps!
+        </p>
+        <button id="startBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+          Start
+        </button>
+      </div>
+
+
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="step1" class="bg-white rounded-xl shadow-md p-6 space-y-4 opacity-40 pointer-events-none cursor-not-allowed">
+      <h2 class="text-xl font-bold text-purple-800">Step 1: Set up your quantum device</h2>
+      <p class="text-gray-600">We need a device that allows us to run this simulation.</p>
+      <p class="text-gray-600">🧰 Let's use <span class="font-bold">PennyLane</span> to simulate a quantum device with 1 qubit (wire).</p>
+      <button id="deviceBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        Prepare Quantum Device
+      </button>
+      <div id="deviceReady" class="text-green-700 font-semibold hidden">✅ Device ready!</div>
+      <details open class="bg-gray-100 p-3 rounded hidden" id="deviceCodeBox">
+        <summary class="font-mono text-purple-700 text-sm cursor-pointer">PennyLane Code</summary>
+        <pre class="text-sm font-mono"># To create states
+dev_analytic = qml.device("default.qubit",
+  wires=1, shots=None)
+
+# To measure outcomes
+dev_shot = qml.device("default.qubit",
+  wires=1,shots=1)         </pre>
+        <p class="text-xs text-gray-500 italic mt-2">This initializes a 1-qubit simulator.</p>
+      </details>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2" class="bg-white rounded-xl shadow-md p-6 space-y-4 opacity-40 pointer-events-none cursor-not-allowed">
+      <h2 class="text-xl font-bold text-purple-800">Step 2: Superposition</h2>
+      <p class="text-gray-600">
+        We know that the coin might land on either heads or tails.
+      </p>
+      <p class="text-gray-600">
+        🪙 Let's define heads to be <span class="font-bold">0</span> and tails to be <span class="font-bold">1</span>.
+      </p>
+      <p class="text-gray-600">
+       ✅ Before flipping, the quantum coin is in this superposed state:
+      </p>
+      <div class="w-fit mx-auto my-4 text-lg text-center text-purple-700">
+        $$|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle$$
+      </div>
+
+      <p class="text-gray-600">
+        Each outcome \( |0\rangle \) or \( |1\rangle \), has an amplitude of \( \frac{1}{\sqrt{2}} \). </p>
+      <p class="text-gray-600"> 
+        Which means that the probability of getting <span class="font-bold">0</span> or <span class="font-bold">1</span> is \( \left(\frac{1}{\sqrt{2}}\right)^2 = \frac{1}{2} \), or <span class="font-bold">50%</span>. Makes sense!
+      </p>
+      <p class="text-gray-600"> 
+        🕹️ Let's simulate this on <span class="font-bold">PennyLane</span>!
+      </p>
+
+
+      <button id="prepareBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        Apply Superposition
+      </button>
+      <div id="prepareResult" class="text-green-700 font-semibold hidden">✅ Qubit is now in superposition! </div>
+      <div id="stateResult" class="inline-flex hidden w-fit bg-gray-100 px-2 rounded font-mono text-gray-600 text-sm"></div>
+      <details open class="bg-gray-100 p-3 rounded hidden" id="prepareCodeBox">
+        <summary class="font-mono text-purple-700 text-sm cursor-pointer">PennyLane Code</summary>
+        <pre class="text-sm font-mono" id="prepareCodeText"></pre>
+        <p class="text-xs text-gray-500 italic mt-2" id="prepareTipText"></p>
+      </details>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step3" class="bg-white rounded-xl shadow-md p-6 space-y-4 opacity-40 pointer-events-none cursor-not-allowed">
+      <h2 class="text-xl font-bold text-purple-800">Step 3: Flip the quantum coin</h2>
+      <p class="text-gray-600">Using <span class="font-bold">PennyLane</span>, we've prepared a quantum state for our coin. </p>
+
+      <p class="text-gray-600">At this point, we <span class="font-bold">don't know</span> whether it will land on <span class="font-bold">0</span> or <span class="font-bold">1</span> — heads or tails.</p>
+
+      <p class="text-gray-600">💡The coin exists in a superposition of both possibilities:</p>
+
+      <div class="w-fit mx-auto my-4 text-lg text-center text-purple-700">
+        $$|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle$$
+      </div>
+
+      <div class="bg-green-100 p-6 rounded">
+        <p class="text-gray-600">✅ In quantum mechanics, <span class="italic">measuring</span> a superposed state causes it to <span class="font-bold">collapse</span> into a definite outcome.</p>
+
+        <p class="text-gray-600">🔒 That means once you flip the coin and see a result, it's locked in. Every future measurement will return the same face — the state has collapsed!</p>
+
+      </div>
+      <p class="text-gray-600">Now it’s time to observe the result. Let's measure!</p>
+
+      <button id="flipBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        🪙 Flip and Measure
+      </button>
+
+      <img class="mx-auto rounded hidden" src="https://media.tenor.com/ELWc6po28wQAAAAM/coin-flip.gif" id=coinGif>
+      <div id="flipResult" class="text-lg font-bold text-center hidden"></div>
+      <div class="w-full bg-purple-100 rounded p-6 hidden text-gray-600" id="flipResultExplanation"></div>
+      <details open class="bg-gray-100 p-3 rounded hidden" id="flipCodeBox">
+        <summary class="font-mono text-purple-700 text-sm cursor-pointer">PennyLane Code</summary>
+        <pre class="text-sm font-mono" id="flipCodeText"></pre>
+        <p class="text-xs text-gray-500 italic mt-2" id="flipTipText"></p>
+      </details>
+      <div class="text-center">
+        <button id="resetBtn" class="text-sm text-gray-600 underline hidden">🔁 Prepare a new qubit</button>
+      </div>
+      <p class="text-sm text-gray-500 italic">
+        Note: This is an analogy to help illustrate the concept.
+      </p>
+    </div>
+
+    <!-- RESET -->
+
+  </div>
+
+  <script>
+    let collapsedState = null;
+    let collapsedStateNoOfMeasurements = 0;
+
+    function enableStep(stepId) {
+      const step = document.getElementById(stepId);
+      step.classList.remove("opacity-40", "pointer-events-none", "cursor-not-allowed");
+    }
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      enableStep("step1");
+      document.getElementById("startBtn").disabled = true;
+    });
+
+    document.getElementById("deviceBtn").addEventListener("click", () => {
+      const btn = document.getElementById("deviceBtn");
+      btn.innerText = "⚙️ Initializing...";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById("deviceReady").classList.remove("hidden");
+        document.getElementById("deviceCodeBox").classList.remove("hidden");
+        enableStep("step2");
+        btn.innerText = "⚙️ Initialized";
+      }, 120);
+    });
+
+    document.getElementById("prepareBtn").addEventListener("click", async () => {
+      const res = await fetch("/prepare");
+      const data = await res.json();
+
+      document.getElementById("prepareResult").classList.remove("hidden");
+      document.getElementById("prepareCodeBox").classList.remove("hidden");
+      document.getElementById("prepareCodeText").innerText = data.code;
+      document.getElementById("prepareTipText").innerText = data.tip;
+
+      document.getElementById("stateResult").innerText = data.state;
+      document.getElementById("stateResult").classList.remove("hidden");
+      
+
+      enableStep("step3");
+    });
+
+    document.getElementById("flipBtn").addEventListener("click", async () => {
+
+      const res = await fetch("/measure");
+      const data = await res.json();
+
+      if (!collapsedState) {
+        collapsedState = data.result;
+      }
+      collapsedStateNoOfMeasurements++;
+
+      const flipResult = document.getElementById("flipResult");
+      flipResult.classList.add("hidden");
+      const flipResultExplanation = document.getElementById("flipResultExplanation");
+      flipResultExplanation.classList.add("hidden");
+
+      const gif = document.getElementById("coinGif");
+      gif.classList.remove("hidden");
+
+      setTimeout(() => {
+        gif.classList.add("hidden");
+
+
+      if (collapsedStateNoOfMeasurements === 1) {
+        flipResultExplanation.innerHTML =
+          `<p>🔎 You've just measured the system and it collapsed into ${collapsedState}.</p>` +
+          `<p>🤯 From this point on, every flip will return the same result: ${collapsedState}.</p>
+          <br>
+          <p>🕹️ Try flipping again to see it in action!</p>`;
+
+        flipResultExplanation.classList.remove("hidden");
+      }
+      else if (collapsedStateNoOfMeasurements === 2) {
+        flipResultExplanation.innerHTML =
+          `<p>🥼 Told you! The coin now always lands on ${collapsedState}.</p>` +
+          `<p>✅ The system collapsed on the first measurement, and it stays there.</p>`;
+
+        flipResultExplanation.classList.remove("hidden");
+      }
+      else {
+        flipResultExplanation.classList.add("hidden");
+      }
+
+      flipResult.innerText = `Measurement #${collapsedStateNoOfMeasurements}\n Collapsed State: 🪙 ${collapsedState}`;
+      flipResult.classList.remove("hidden");
+
+      document.getElementById("flipCodeText").innerText = data.code;
+      document.getElementById("flipTipText").innerText = data.tip;
+      document.getElementById("flipCodeBox").classList.remove("hidden");
+      document.getElementById("flipTipText").classList.remove("hidden");
+      document.getElementById("resetBtn").classList.remove("hidden");
+      }, 4080);
+    });
+
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      collapsedState = null;
+      collapsedStateNoOfMeasurements = 0;
+      location.reload();
+    });
+  </script>
+</body>
+</html>
